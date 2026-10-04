@@ -1,20 +1,2 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://digitalproductsbundle.in"),
-  title: {
-    default: "Digital Products Bundle — Premium Digital Products",
-    template: "%s | Digital Products Bundle",
-  },
-  description: "Discover premium digital products, templates, tools and bundles built to save time and help you work smarter.",
-  alternates: { canonical: "/" },
-};
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
+import type { Metadata } from "next"; import "./globals.css";
+export const metadata:Metadata={metadataBase:new URL("https://digitalproductsbundle.in"),title:{default:"Digital Products Bundle — Practical Digital Products",template:"%s | Digital Products Bundle"},description:"Shop practical digital products, software and website resources from Digital Products Bundle.",alternates:{canonical:"/"}}; export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}
