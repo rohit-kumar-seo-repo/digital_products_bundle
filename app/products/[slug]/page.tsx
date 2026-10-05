@@ -163,18 +163,17 @@ export default async function ProductPage({
             <p>Watch the real product workflow before you choose a plan. Play, pause, seek and control the audio directly in the embedded player.</p>
           </div>
           <div className="waDemoPlayer">
-            <div className="waDemoLabel">DEMO VIDEO / 02:45 START POINT</div>
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/SA9XQHqPvUs?start=165&controls=1&rel=0&modestbranding=1&playsinline=1&mute=1"
+            <div className="waDemoLabel">PRODUCT DEMO / 02:45</div>
+            <video
+              src="https://d2ol7oe51mr4n9.cloudfront.net/user_3J2LfjzyqF75p1hw7z8VTckaj1A/ec5c6627-b8e6-4195-a08e-e2f22ae8fb7f.mp4"
               title="WA Sender product demo"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
+              controls
+              playsInline
+              preload="metadata"
             />
             <div className="waDemoFooter">
-              <span>Embedded product demonstration</span>
-              <b>Audio starts muted · visitor can enable sound</b>
+              <span>Native product demonstration</span>
+              <b>Play, pause, seek and audio controls available</b>
             </div>
           </div>
         </section>
