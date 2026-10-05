@@ -140,9 +140,9 @@
 
 /* Digital Products Bundle brand system */
 .brandLogo{display:inline-flex;align-items:center;flex:0 0 auto}
-.brandLogo img{display:block;width:205px;height:auto}
-.headerInner .brandLogo img{width:205px}
-.footerBrandLogo img{width:245px}
+.brandLogo img{display:block;width:205px;height:auto;max-height:58px;object-fit:contain;object-position:center}
+.headerInner .brandLogo img{width:205px;max-height:58px}
+.footerBrandLogo img{width:245px;max-height:86px}
 .footerMaintained{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px;border-top:1px solid var(--line);margin-top:40px;padding-top:28px}
 .footerMaintained>div{min-height:78px;padding-right:25px;border-right:1px solid var(--line)}
 .footerMaintained>div:last-child{border-right:0}
@@ -151,7 +151,7 @@
 .footerMaintained a{display:block!important;font-size:11px!important;color:#666!important;margin:5px 0!important}
 .footerMaintained a:hover{color:#e21b2d!important;text-decoration:underline}
 @media(max-width:900px){
-  .headerInner .brandLogo img{width:175px}
+  .headerInner .brandLogo img{width:175px;max-height:54px}
   .headerInner nav{gap:18px}
   .footerMaintained{grid-template-columns:1fr 1fr}
   .footerMaintained>div:nth-child(2){border-right:0}
@@ -159,11 +159,11 @@
 @media(max-width:560px){
   .siteHeader{height:70px}
   .headerInner{width:min(100% - 28px,1280px);gap:10px}
-  .headerInner .brandLogo img{width:145px}
+  .headerInner .brandLogo img{width:145px;max-height:48px}
   .headerInner nav{display:none}
   .headerRight{margin-left:auto}
   .searchLink{display:none}
-  .footerBrandLogo img{width:220px}
+  .footerBrandLogo img{width:220px;max-height:78px}
   .footerMaintained{grid-template-columns:1fr;gap:0}
   .footerMaintained>div{border-right:0;border-bottom:1px solid var(--line);padding:18px 0}
   .footerMaintained>div:last-child{border-bottom:0}
