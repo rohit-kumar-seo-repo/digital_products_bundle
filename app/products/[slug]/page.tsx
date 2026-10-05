@@ -100,6 +100,7 @@ export default async function ProductPage({
   if (!p) notFound();
 
   if (slug !== "wa-sender") {
+    const hasPricing = Boolean(p.pricing?.length);
     const plan = p.pricing?.[0]?.label || "Standard";
     return (
       <main className="productV3">
@@ -112,12 +113,42 @@ export default async function ProductPage({
               <div className="productVisualBottom"><span>Digital delivery</span><span>01 / 01</span></div>
             </Reveal>
             <Reveal className="productPurchaseV3" delay={120}>
-              <span className="eyebrow">{p.category}</span><h1>{p.name}</h1><p>{p.shortDescription}</p>
-              <div className="priceLabel"><span>STARTING FROM</span><strong>{p.pricing?.[0]?.price || "Digital"}</strong></div>
-              {p.pricing && <div className="plansV3">{p.pricing.map((x) => <div className={"planV3 " + (x.label === plan ? "selected" : "")} key={x.label}><span><b>{x.label}</b><small>{x.note}</small></span><strong>{x.price}</strong></div>)}</div>}
-              <div className="productActionsV3"><BuyNow slug={p.slug} plan={plan}/><AddToCart slug={p.slug} plan={plan}/></div>
+              <span className="eyebrow">{p.category}</span>
+              <h1>{p.name}</h1>
+              <p>{p.shortDescription}</p>
+              <div className="priceLabel"><span>{hasPricing ? "STARTING FROM" : "PRICING"}</span><strong>{hasPricing ? p.pricing?.[0]?.price : "Coming soon"}</strong></div>
+              {hasPricing && <div className="plansV3">{p.pricing?.map((x) => <div className={"planV3 " + (x.label === plan ? "selected" : "")} key={x.label}><span><b>{x.label}</b><small>{x.note}</small></span><strong>{x.price}</strong></div>)}</div>}
+              <div className="productActionsV3">
+                {hasPricing ? <><BuyNow slug={p.slug} plan={plan}/><AddToCart slug={p.slug} plan={plan}/></> : <Link className="button buttonDark" href="/contact">Ask about this product <span>↗</span></Link>}
+              </div>
               <div className="trustLineV3"><span>SECURE PAYMENT</span><span>DIGITAL DELIVERY</span><span>SUPPORT AVAILABLE</span></div>
             </Reveal>
+          </section>
+
+          <section className="productInfoV3">
+            <Reveal className="productInfoMain">
+              <span className="eyebrow">WHAT YOU GET</span>
+              <h2>Clear details.<br/><em>No guesswork.</em></h2>
+              <div className="featureGridV3">{p.features.map((feature,i)=><article key={feature}><span>0{String(i+1).padStart(2,"0")}</span><strong>{feature}</strong><p>Included with this product as described on the product listing.</p></article>)}</div>
+            </Reveal>
+            <Reveal className="productAsideV3" delay={100}>
+              <div><span>DELIVERY</span><strong>{p.delivery}</strong></div>
+              <div><span>SUPPORT</span><strong>{p.support || "Store support is available for product and order questions."}</strong></div>
+              <div><span>FORMAT</span><strong>{p.type === "Software" ? "Windows desktop software" : "Digital bundle / online access"}</strong></div>
+            </Reveal>
+          </section>
+
+          <section className="processV3">
+            <div className="sectionEyebrowV3">HOW IT WORKS</div>
+            <div className="processTrack">
+              <div><b>01</b><strong>Review</strong><p>Check the product details, requirements, delivery method and pricing.</p></div>
+              <div><b>02</b><strong>Purchase</strong><p>{hasPricing ? "Choose your plan and continue through the configured checkout." : "Contact support while pricing and purchase options are being finalized."}</p></div>
+              <div><b>03</b><strong>Access</strong><p>Receive the digital delivery or activation instructions associated with the product.</p></div>
+            </div>
+          </section>
+
+          <section className="productFinalV3">
+            <div><span className="eyebrow">KEEP EXPLORING</span><h2>One product today.<br/><em>More useful drops ahead.</em></h2><Link className="button buttonDark" href="/products">Back to the shop ↗</Link></div>
           </section>
         </div>
       </main>
