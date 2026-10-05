@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 190" role="img" aria-labelledby="title desc">
+<title id="title">Digital Products Bundle</title>
+<desc id="desc">Digital Products Bundle logo with a red shopping bag, cursor and motion lines.</desc>
+<rect width="760" height="190" rx="24" fill="white"/>
+<g transform="translate(18 20)">
+  <path d="M54 50h105l-7 99H45z" fill="#e21b2d"/>
+  <path d="M73 51V39c0-24 15-38 34-38s34 14 34 38v12h-15V40c0-14-7-24-19-24S88 26 88 40v11z" fill="#e21b2d"/>
+  <path d="M8 77h47M0 100h38M18 123h35" stroke="#e21b2d" stroke-width="12" stroke-linecap="round"/>
+  <path d="M93 66l77 72-36-2-20 31-12-8 19-32-28-20z" fill="#111" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M102 76l55 55-26-1-14 22-7-5 14-23-22-16z" fill="#fff"/>
+</g>
+<text x="225" y="82" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800" letter-spacing="-2.5" fill="#111">Digital</text>
+<text x="225" y="137" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800" letter-spacing="-2.5" fill="#e21b2d">Products</text>
+<text x="232" y="165" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="9" fill="#111">BUNDLE</text>
+</svg>
