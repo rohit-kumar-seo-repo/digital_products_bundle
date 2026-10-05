@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound(){return <main className="notFoundV3"><div className="container"><span className="eyebrow">404 / NOT FOUND</span><h1>That page<br/><em>doesn't exist.</em></h1><p>The link may be outdated or the product may have moved. Head back to the store and continue browsing.</p><div><Link className="button buttonDark" href="/products">Browse products ↗</Link><Link className="notFoundLink" href="/">Back home</Link></div></div></main>}
