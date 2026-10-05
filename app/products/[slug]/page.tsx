@@ -154,6 +154,31 @@ export default async function ProductPage({
           <div><strong>04</strong><span>Track</span><p>Review sending activity and campaign performance.</p></div>
         </section>
 
+        <section className="waDemoSection" id="video-demo">
+          <div className="waDemoHead">
+            <div>
+              <span className="eyebrow">PRODUCT DEMO / WA SENDER</span>
+              <h2>See WA Sender <em>in action.</em></h2>
+            </div>
+            <p>Watch the real product workflow before you choose a plan. Play, pause, seek and control the audio directly in the embedded player.</p>
+          </div>
+          <div className="waDemoPlayer">
+            <div className="waDemoLabel">DEMO VIDEO / 02:45 START POINT</div>
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/SA9XQHqPvUs?start=165&controls=1&rel=0&modestbranding=1&playsinline=1&mute=1"
+              title="WA Sender product demo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+            <div className="waDemoFooter">
+              <span>Embedded product demonstration</span>
+              <b>Audio starts muted · visitor can enable sound</b>
+            </div>
+          </div>
+        </section>
+
         <section className="waIntro">
           <Reveal><span className="eyebrow">WHY WA SENDER</span><h2>A practical <em>bulk WhatsApp sender</em> for teams that are tired of repetitive messaging.</h2></Reveal>
           <Reveal delay={100}><p>Instead of copying the same message contact by contact, WA Sender gives you a structured desktop workflow for importing contacts, preparing personalized campaigns, attaching media, controlling sending pace and monitoring results.</p><p>It is designed for marketers, agencies, sales teams, local businesses and e-commerce operators that already use WhatsApp as part of their customer communication.</p></Reveal>
