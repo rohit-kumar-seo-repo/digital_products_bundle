@@ -1,1 +1,107 @@
-import Link from "next/link";import {supabaseKey,supabaseUrl} from "@/lib/store-config";async function db(path:string){return fetch(supabaseUrl+"/rest/v1/"+path,{headers:{"apikey":supabaseKey,"Authorization":"Bearer "+supabaseKey},cache:"no-store"})}export default async function Success({searchParams}:{searchParams:Promise<{order?:string}>}){const q=await searchParams;let order:any=null,item:any=null;if(q.order&&supabaseUrl&&supabaseKey){const r=await db("orders?order_number=eq."+encodeURIComponent(q.order)+"&select=id,order_number,email,status,amount_paise,order_items(product_name,variant_name,product_id)");if(r.ok){const rows=await r.json();order=rows[0]||null;item=order?.order_items?.[0]||null}}let drive="";if(order?.status==="PAID"&&item?.product_id){const r=await db("products?id=eq."+encodeURIComponent(item.product_id)+"&select=drive_url");if(r.ok){const rows=await r.json();drive=rows[0]?.drive_url||""}}return <main className="successV3"><div className="container">{order?.status==="PAID"?<div className="successV3Card"><span className="successOrb">✓</span><span className="eyebrow">PAYMENT CONFIRMED / {order.order_number}</span><h1>You're all<br/><em>set.</em></h1><p>Your payment for <b>{item?.product_name}</b> has been confirmed.</p>{drive&&<a className="button buttonDark" href={drive} target="_blank" rel="noreferrer">Access your product ↗</a>}<small>A confirmation email will be sent to {order.email} with your product access link.</small><Link href="/products">Continue shopping →</Link></div>:<div className="successV3Card pending"><span className="successOrb">...</span><span className="eyebrow">ORDER / {q.order||"PENDING"}</span><h1>We're checking<br/><em>your payment.</em></h1><p>Your order is waiting for verified payment confirmation. Access will appear here after confirmation.</p><Link className="button buttonDark" href="/products">Back to shop ↗</Link></div>}</div></main>}
+import Link from "next/link";
+import { supabaseUrl } from "@/lib/store-config";
+
+type OrderStatus = {
+  order: {
+    orderNumber: string;
+    status: string;
+    amountPaise: number;
+    currency: string;
+    paidAt: string | null;
+    productName: string;
+    variantName: string | null;
+    accessUrl: string | null;
+    delivery: string;
+    support: string | null;
+    emailSent: boolean;
+  } | null;
+};
+
+async function getOrderStatus(orderNumber: string): Promise<OrderStatus["order"] | null> {
+  if (!supabaseUrl) return null;
+
+  const response = await fetch(
+    supabaseUrl + "/functions/v1/order-status?order=" + encodeURIComponent(orderNumber),
+    {
+      headers: { "Cache-Control": "no-store" },
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) return null;
+
+  const data = (await response.json()) as OrderStatus;
+  return data.order || null;
+}
+
+export default async function Success({
+  searchParams,
+}: {
+  searchParams: Promise<{ order?: string }>;
+}) {
+  const q = await searchParams;
+  const order = q.order ? await getOrderStatus(q.order) : null;
+
+  return (
+    <main className="successV3">
+      <div className="container">
+        {order?.status === "PAID" ? (
+          <div className="successV3Card">
+            <span className="successOrb">✓</span>
+            <span className="eyebrow">PAYMENT CONFIRMED / {order.orderNumber}</span>
+            <h1>
+              You're all
+              <br />
+              <em>set.</em>
+            </h1>
+            <p>
+              Your payment for <b>{order.productName}</b>
+              {order.variantName ? <> — {order.variantName}</> : null} has been confirmed.
+            </p>
+
+            {order.accessUrl ? (
+              <a
+                className="button buttonDark"
+                href={order.accessUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Access your product ↗
+              </a>
+            ) : (
+              <div className="successDelivery">
+                <strong>Delivery instructions</strong>
+                <p>{order.delivery}</p>
+                {order.support ? <p>Support: {order.support}</p> : null}
+              </div>
+            )}
+
+            <small>
+              {order.emailSent
+                ? "Your confirmation email has been sent."
+                : "Your order is confirmed. If email delivery is enabled, your confirmation will arrive shortly."}
+            </small>
+            <Link href="/products">Continue shopping →</Link>
+          </div>
+        ) : (
+          <div className="successV3Card pending">
+            <span className="successOrb">...</span>
+            <span className="eyebrow">ORDER / {q.order || "PENDING"}</span>
+            <h1>
+              We're checking
+              <br />
+              <em>your payment.</em>
+            </h1>
+            <p>
+              Your order is waiting for verified payment confirmation. Access will appear here
+              after Razorpay confirms the payment.
+            </p>
+            <Link className="button buttonDark" href="/products">
+              Back to shop ↗
+            </Link>
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
