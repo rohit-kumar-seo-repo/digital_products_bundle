@@ -1,61 +1,19 @@
 import Link from "next/link";
 import {products,categories} from "@/lib/products";
 import {ProductCard,TrustStrip} from "@/components/store";
-
-export default function Home(){
-  const featured=products.slice(0,4);
-  return <main>
-    <section className="heroEditorial">
-      <div className="heroOrb" aria-hidden="true"/>
-      <div className="container heroEditorialInner">
-        <div className="heroEditorialCopy">
-          <div className="eyebrowRow"><span className="statusDot"/><span>THE DIGITAL GOODS SHOP</span></div>
-          <h1>Useful things.<br/><i>Beautifully packaged.</i></h1>
-          <p>Software, templates and ready-to-use resources for people who want to spend less time setting things up and more time getting work done.</p>
-          <div className="heroActions"><Link className="button buttonDark magnetic" href="/products">Explore products <span>↗</span></Link><Link className="textLink" href="#featured">See what’s new <span>↓</span></Link></div>
-        </div>
-        <div className="heroProductStage">
-          <div className="heroStageLabel">01 / FEATURED</div>
-          <Link href="/products/wa-sender" className="heroProductCard">
-            <div className="heroCardTop"><span>SOFTWARE</span><b>POPULAR</b></div>
-            <div className="heroCardCenter"><small>WA</small><strong>Sender</strong><span>Bulk WhatsApp marketing workflows</span></div>
-            <div className="heroCardBottom"><span>Starting at</span><strong>₹149</strong><span className="circleArrow">↗</span></div>
-          </Link>
-          <div className="floatingNote noteA"><b>Instant</b><span>Digital delivery</span></div>
-          <div className="floatingNote noteB"><b>01</b><span>Product in focus</span></div>
-        </div>
-      </div>
-    </section>
-
-    <TrustStrip/>
-
-    <section className="ticker" aria-label="Store highlights"><div><span>SOFTWARE</span><i/> <span>TEMPLATES</span><i/> <span>BUNDLES</span><i/> <span>RESOURCES</span><i/> <span>SOFTWARE</span><i/> <span>TEMPLATES</span><i/></div></section>
-
-    <section className="section editorialSection container" id="featured">
-      <div className="sectionIntro editorialIntro"><div><span className="eyebrow">THE SHORTLIST</span><h2>Start with something<br/><i>actually useful.</i></h2></div><Link className="textLink" href="/products">View collection <span>↗</span></Link></div>
-      <div className="editorialProducts">{featured.map((p,i)=><ProductCard key={p.slug} product={p} index={i}/>)}</div>
-    </section>
-
-    <section className="categoryFeature container" id="categories">
-      <div className="categoryLead"><span className="eyebrow">SHOP BY NEED</span><h2>Find your<br/><i>next shortcut.</i></h2><p>Browse by the kind of work you are trying to make easier. The catalog is built to grow without making discovery harder.</p></div>
-      <div className="categoryList">{categories.map((c,i)=><Link className="categoryRow" href={"/products#category-"+c.slug} key={c.slug}><span>0{i+1}</span><div><b>{c.name}</b><small>{c.description}</small></div><strong>↗</strong></Link>)}</div>
-    </section>
-
-    <section className="manifesto container">
-      <div className="manifestoNumber">02</div>
-      <div><span className="eyebrow light">THE IDEA</span><h2>Less hunting.<br/>More doing.</h2><p>Digital products should feel straightforward: know what is included, know what it costs, pay securely, and get access without unnecessary friction.</p><Link className="button buttonLight" href="/about">Why Digital Products Bundle <span>↗</span></Link></div>
-      <div className="manifestoSide"><span>BUILT FOR</span><b>Creators<br/>Freelancers<br/>Businesses</b></div>
-    </section>
-
-    <section className="section container valueSection">
-      <div className="sectionIntro"><div><span className="eyebrow">THE EXPERIENCE</span><h2>Clear from click<br/>to access.</h2></div></div>
-      <div className="valueRail">
-        <div><span>01</span><b>Choose</b><p>Detailed product pages make the decision easier before checkout.</p></div>
-        <div><span>02</span><b>Pay</b><p>A focused checkout hands you over to the configured secure payment page.</p></div>
-        <div><span>03</span><b>Access</b><p>After successful payment confirmation, digital delivery follows the product instructions.</p></div>
-      </div>
-    </section>
-
-    <section className="faqBand newFaq"><div className="container"><div><span className="eyebrow">NEED TO KNOW</span><h2>Questions before<br/><i>you buy?</i></h2></div><Link className="button buttonDark" href="/faq">Read the FAQ <span>↗</span></Link></div></section>
-  </main>
-}
+import {Reveal} from "@/components/motion";
+const tickerItems=["DIGITAL PRODUCTS","INSTANT ACCESS","CLEAR PRICING","SECURE CHECKOUT","REAL SUPPORT","NO PHYSICAL SHIPPING"];
+export default function Home(){const featured=products.slice(0,4);return <main className="homeV2">
+<div className="topMarquee"><div className="marqueeTrack">{[...tickerItems,...tickerItems].map((x,i)=><span key={i}>{x}<b>+</b></span>)}</div></div>
+<section className="heroV2"><div className="heroGridGlow"/><div className="container heroV2Inner"><Reveal className="heroV2Copy"><div className="heroKicker"><span className="pulseDot"/> DIGITAL PRODUCTS BUNDLE <span>EST. 2026</span></div><h1>Buy useful.<br/><em>Get moving.</em></h1><p>Practical software, templates and digital resources — selected for people who want a faster way to get work done.</p><div className="heroV2Actions"><Link className="button buttonDark magneticV2" href="/products">Browse the store <span>↗</span></Link><Link className="heroSecondary" href="#how-it-works">How it works <span>↓</span></Link></div><div className="heroMiniTrust"><span>✓ Clear product details</span><span>✓ Secure payment</span><span>✓ Digital delivery</span></div></Reveal>
+<Reveal className="heroReelWrap" delay={120}><div className="reelTop"><span>FEATURED DROP</span><span>SCROLL TO EXPLORE</span></div><div className="heroReel">
+<Link href="/products/wa-sender" className="reelCard reelOne"><div className="reelNoise"/><div className="reelCardHead"><span>SOFTWARE / 01</span><b>POPULAR</b></div><div className="reelWord">WA<br/><i>SENDER</i></div><div className="reelCardFoot"><span>Bulk WhatsApp workflows</span><strong>₹149</strong></div></Link>
+<Link href="/products/digital-website-bundle" className="reelCard reelTwo"><div className="reelCardHead"><span>BUNDLE / 02</span><b>NEW</b></div><div className="reelWord">WEB<br/><i>BUNDLE</i></div><div className="reelCardFoot"><span>Templates + resources</span><strong>Explore</strong></div></Link>
+<div className="reelCard reelThree"><div className="reelCardHead"><span>RESOURCES / 03</span><b>SOON</b></div><div className="reelWord">MORE<br/><i>COMING</i></div><div className="reelCardFoot"><span>New digital drops</span><strong>Stay tuned</strong></div></div></div><div className="reelProgress"><span/><span/><span/></div></Reveal></div></section>
+<TrustStrip/><section className="trustMarquee"><div className="trustMarqueeTrack"><span>SHOP WITH CONFIDENCE</span><b>•</b><span>SEE WHAT YOU GET BEFORE YOU BUY</span><b>•</b><span>SUPPORT WHEN YOU NEED IT</span><b>•</b><span>SHOP WITH CONFIDENCE</span><b>•</b><span>SEE WHAT YOU GET BEFORE YOU BUY</span><b>•</b><span>SUPPORT WHEN YOU NEED IT</span><b>•</b></div></section>
+<section className="section homeCollection container" id="featured"><Reveal className="v2SectionHead"><div><span className="eyebrow">CURATED DIGITAL GOODS</span><h2>Small catalog.<br/><em>Useful products.</em></h2></div><p>We keep the storefront focused so you can understand the product before you reach checkout.</p><Link className="button buttonGhost" href="/products">View all products <span>↗</span></Link></Reveal><div className="v2ProductGrid">{featured.map((p,i)=><Reveal key={p.slug} delay={i*90}><ProductCard product={p} index={i}/></Reveal>)}</div></section>
+<section className="categoryScroller" id="categories"><div className="container"><Reveal className="v2SectionHead categoryHead"><div><span className="eyebrow">FIND YOUR SHORTCUT</span><h2>Shop by<br/><em>what you need.</em></h2></div><p>From software to templates, choose the type of digital product that fits the job.</p></Reveal><div className="categoryScrollerTrack">{categories.map((c,i)=><Link className="categoryTile" href={"/products#category-"+c.slug} key={c.slug}><span>0{i+1}</span><strong>{c.name}</strong><small>{c.description}</small><b>Explore ↗</b></Link>)}<div className="categoryTile categoryTileSoon"><span>+</span><strong>More drops</strong><small>New tools and resources will be added as the catalog grows.</small><b>Coming soon</b></div></div></div></section>
+<section className="trustStory container"><Reveal className="trustStoryIntro"><span className="eyebrow">WHY THIS STORE EXISTS</span><h2>No mystery.<br/><em>No unnecessary friction.</em></h2></Reveal><div className="trustStoryGrid"><Reveal className="trustFeature" delay={60}><span>01</span><strong>Know what you're buying</strong><p>Product pages explain the format, pricing, delivery method and support details before you pay.</p></Reveal><Reveal className="trustFeature" delay={120}><span>02</span><strong>Pay through the configured checkout</strong><p>Your order is created first, then you continue to the payment provider. Payment confirmation is handled separately from the browser redirect.</p></Reveal><Reveal className="trustFeature" delay={180}><span>03</span><strong>Get digital access</strong><p>Once payment is confirmed, the order can move into its delivery flow without physical shipping or waiting for a courier.</p></Reveal></div></section>
+<section className="howV2 container" id="how-it-works"><Reveal className="howIntro"><span className="eyebrow">THE BUYING JOURNEY</span><h2>Three steps.<br/><em>That's it.</em></h2></Reveal><div className="howTimeline"><div className="timelineLine"/><Reveal className="timelineStep"><span>01</span><strong>Choose</strong><p>Open a product, check what's included, compare the available plan and decide.</p></Reveal><Reveal className="timelineStep" delay={100}><span>02</span><strong>Pay</strong><p>Enter your details and continue to the configured secure payment experience.</p></Reveal><Reveal className="timelineStep" delay={200}><span>03</span><strong>Access</strong><p>After successful confirmation, follow the product's digital delivery instructions.</p></Reveal></div></section>
+<section className="darkTrust container"><div className="darkTrustNoise"/><Reveal><span className="eyebrow light">THE STORE PROMISE</span><h2>Useful products.<br/><em>Honest presentation.</em></h2><p>We would rather show you exactly what a product is, how it is delivered and where to get help than hide the important details behind flashy sales copy.</p><Link className="button buttonLight" href="/faq">Read buying FAQs <span>↗</span></Link></Reveal><div className="darkStats"><div><b>01</b><span>Clear pricing</span></div><div><b>02</b><span>Digital delivery</span></div><div><b>03</b><span>Support available</span></div></div></section>
+<section className="finalCta"><div className="container"><Reveal><span className="eyebrow">READY WHEN YOU ARE</span><h2>Find one useful<br/><em>thing today.</em></h2><Link className="button buttonDark" href="/products">Explore products <span>↗</span></Link></Reveal></div></section></main>}
