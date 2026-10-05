@@ -1,0 +1,3 @@
+"use client";
+import {useEffect,useRef,useState} from "react";
+export function Reveal({children,className="",delay=0}:{children:React.ReactNode;className?:string;delay?:number}){const ref=useRef<HTMLDivElement>(null);const[visible,setVisible]=useState(false);useEffect(()=>{const el=ref.current;if(!el)return;const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){setVisible(true);io.disconnect()}},{threshold:.12,rootMargin:"0px 0px -40px"});io.observe(el);return()=>io.disconnect()},[]);return <div ref={ref} className={"revealV2 "+(visible?"isVisible ":"")+className} style={{"--reveal-delay":delay+"ms"} as React.CSSProperties}>{children}</div>}
