@@ -212,3 +212,10 @@
   .contactActions{flex-direction:column}
   .contactActions .button{width:100%;justify-content:center}
 }
+
+.notFoundV3{padding:130px 0 170px;min-height:65vh;display:flex;align-items:center}
+.notFoundV3 h1{font-size:clamp(65px,8vw,110px);line-height:.82;letter-spacing:-.09em;margin:18px 0 25px}
+.notFoundV3 h1 em{font-style:normal;color:#888}
+.notFoundV3 p{max-width:520px;color:#777;font-size:12px;line-height:1.8;margin-bottom:28px}
+.notFoundV3>div>div{display:flex;align-items:center;gap:20px}
+.notFoundLink{font-size:10px;color:#555}
