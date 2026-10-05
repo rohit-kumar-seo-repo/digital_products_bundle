@@ -9,16 +9,18 @@ async function verifyWebhook(raw: string, signature: string, secret: string) {
     new TextEncoder().encode(secret),
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["sign"]
+    ["sign"],
   );
   const digest = new Uint8Array(
-    await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(raw))
+    await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(raw)),
   );
   const expected = hex(digest);
-  return expected.length === signature.length &&
-    crypto.subtle.timingSafeEqual
-      ? crypto.subtle.timingSafeEqual(new TextEncoder().encode(expected), new TextEncoder().encode(signature))
-      : expected === signature;
+  if (expected.length !== signature.length) return false;
+  let diff = 0;
+  for (let i = 0; i < expected.length; i++) {
+    diff |= expected.charCodeAt(i) ^ signature.charCodeAt(i);
+  }
+  return diff === 0;
 }
 
 async function sendConfirmationEmail(order: any, product: any, orderNumber: string) {
@@ -26,13 +28,9 @@ async function sendConfirmationEmail(order: any, product: any, orderNumber: stri
   if (!apiKey || !order?.email) return false;
 
   const from = Deno.env.get("EMAIL_FROM") || "orders@digitalproductsbundle.in";
-  const accessUrl = product?.drive_url
-    ? Deno.env.get("SITE_URL") + "/payment/success?order=" + encodeURIComponent(orderNumber)
-    : Deno.env.get("SITE_URL") + "/payment/success?order=" + encodeURIComponent(orderNumber);
-
-  const html = product?.drive_url
-    ? `<div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;padding:32px"><h1>Payment confirmed</h1><p>Your order <strong>${orderNumber}</strong> for <strong>${product.name}</strong> is confirmed.</p><p><a href="${accessUrl}" style="display:inline-block;padding:12px 18px;background:#111;color:#fff;text-decoration:none;border-radius:8px">Open your order</a></p><p>Your product access is available from the order page after verification.</p></div>`
-    : `<div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;padding:32px"><h1>Payment confirmed</h1><p>Your order <strong>${orderNumber}</strong> for <strong>${product?.name || "your digital product"}</strong> is confirmed.</p><p><a href="${accessUrl}" style="display:inline-block;padding:12px 18px;background:#111;color:#fff;text-decoration:none;border-radius:8px">View delivery instructions</a></p></div>`;
+  const siteUrl = Deno.env.get("SITE_URL") || "https://digitalproductsbundle.in";
+  const accessUrl = siteUrl + "/payment/success?order=" + encodeURIComponent(orderNumber);
+  const html = `<div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;padding:32px"><h1>Payment confirmed</h1><p>Your order <strong>${orderNumber}</strong> for <strong>${product?.name || "your digital product"}</strong> is confirmed.</p><p><a href="${accessUrl}" style="display:inline-block;padding:12px 18px;background:#111;color:#fff;text-decoration:none;border-radius:8px">View your order</a></p></div>`;
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -61,10 +59,7 @@ export default {
     const eventId = req.headers.get("x-razorpay-event-id") || "";
     const webhookSecret = Deno.env.get("RAZORPAY_WEBHOOK_SECRET") || "";
 
-    if (!webhookSecret) {
-      return Response.json({ error: "Webhook secret is not configured." }, { status: 503 });
-    }
-
+    if (!webhookSecret) return Response.json({ error: "Webhook secret is not configured." }, { status: 503 });
     if (!(await verifyWebhook(raw, signature, webhookSecret))) {
       return Response.json({ error: "Invalid webhook signature." }, { status: 401 });
     }
@@ -86,15 +81,11 @@ export default {
     });
 
     if (eventInsert.error) {
-      if (eventInsert.error.code === "23505") {
-        return Response.json({ received: true, duplicate: true });
-      }
+      if (eventInsert.error.code === "23505") return Response.json({ received: true, duplicate: true });
       return Response.json({ error: "Unable to record webhook." }, { status: 500 });
     }
 
-    if (event.event !== "payment_link.paid") {
-      return Response.json({ received: true });
-    }
+    if (event.event !== "payment_link.paid") return Response.json({ received: true });
 
     const link = event?.payload?.payment_link?.entity;
     const payment = event?.payload?.payment?.entity;
@@ -113,9 +104,7 @@ export default {
       .limit(1)
       .maybeSingle();
 
-    if (orderError || !order) {
-      return Response.json({ error: "Order not found." }, { status: 404 });
-    }
+    if (orderError || !order) return Response.json({ error: "Order not found." }, { status: 404 });
 
     if (order.status !== "PAID") {
       const paidAmount = Number(payment?.amount ?? link?.amount_paid ?? 0);
@@ -135,9 +124,7 @@ export default {
         })
         .eq("id", order.id);
 
-      if (updateError) {
-        return Response.json({ error: "Unable to mark order paid." }, { status: 500 });
-      }
+      if (updateError) return Response.json({ error: "Unable to mark order paid." }, { status: 500 });
     }
 
     const { data: item } = await ctx.supabaseAdmin
@@ -162,7 +149,10 @@ export default {
       if (sent) {
         await ctx.supabaseAdmin
           .from("orders")
-          .update({ email_sent_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+          .update({
+            email_sent_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          })
           .eq("id", order.id);
       }
     }
