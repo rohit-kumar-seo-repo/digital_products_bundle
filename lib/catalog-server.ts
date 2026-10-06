@@ -2,7 +2,7 @@ import { products, Product } from "@/lib/products";
 import { readCanvaImageManifest } from "@/lib/canva-assets";
 
 export async function getCatalogProducts(): Promise<Product[]> {
-  const overrides = await readCanvaImageManifest().catch(() => ({}));
+  const overrides = await readCanvaImageManifest().catch(() => ({} as Record<string, { url: string; designId: string; updatedAt: string }>));
   return products.map((product) => ({
     ...product,
     image: overrides[product.slug]?.url || product.image,
