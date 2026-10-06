@@ -102,54 +102,40 @@ export default async function ProductPage({
   if (slug !== "wa-sender") {
     const hasPricing = Boolean(p.pricing?.length);
     const plan = p.pricing?.[0]?.label || "Standard";
+    const bundle = slug === "digital-website-bundle";
+    const bundleBenefits = [
+      ["01","Premium WordPress templates","A large library of customizable layouts for business, service, landing and niche websites."],
+      ["02","Premium plugins","Useful plugin resources to help extend WordPress websites without rebuilding everything from scratch."],
+      ["03","Video training","Step-by-step training to help you install, customize and use the supplied website resources."],
+      ["04","Shopify templates","A separate collection of Shopify design resources for stores and ecommerce projects."],
+      ["05","Digital product landing pages","Ready-made sales-page resources for creators and digital-product sellers."],
+      ["06","Community access","WhatsApp Pro community access for product-related discussion and support."],
+    ];
+    const audience = ["Small business owners","Freelancers","WordPress developers","Web design agencies","Ecommerce sellers","Anyone launching a website faster"];
     return (
-      <main className="productV3">
+      <main className={bundle ? "bundlePage" : "productV3"}>
         <div className="container">
           <div className="productCrumb"><Link href="/products">Shop</Link><span>/</span><b>{p.name}</b></div>
-          <section className="productHeroV3">
-            <Reveal className="productVisualV3">
-              <div className="productVisualTop"><span>{p.type}</span><b>{p.badge || "DIGITAL"}</b></div>
-              <div className="productDisplay"><small>DIGITAL PRODUCTS BUNDLE</small><strong>{p.imageLabel}</strong><span>{p.category}</span></div>
-              <div className="productVisualBottom"><span>Digital delivery</span><span>01 / 01</span></div>
-            </Reveal>
-            <Reveal className="productPurchaseV3" delay={120}>
-              <span className="eyebrow">{p.category}</span>
-              <h1>{p.name}</h1>
-              <p>{p.shortDescription}</p>
-              <div className="priceLabel"><span>{hasPricing ? "STARTING FROM" : "PRICING"}</span><strong>{hasPricing ? p.pricing?.[0]?.price : "Coming soon"}</strong></div>
-              {hasPricing && <div className="plansV3">{p.pricing?.map((x) => <div className={"planV3 " + (x.label === plan ? "selected" : "")} key={x.label}><span><b>{x.label}</b><small>{x.note}</small></span><strong>{x.price}</strong></div>)}</div>}
-              <div className="productActionsV3">
-                {hasPricing ? <><BuyNow slug={p.slug} plan={plan}/><AddToCart slug={p.slug} plan={plan}/></> : <Link className="button buttonDark" href="/contact">Ask about this product <span>↗</span></Link>}
-              </div>
-              <div className="trustLineV3"><span>SECURE PAYMENT</span><span>DIGITAL DELIVERY</span><span>SUPPORT AVAILABLE</span></div>
-            </Reveal>
-          </section>
-
-          <section className="productInfoV3">
-            <Reveal className="productInfoMain">
-              <span className="eyebrow">WHAT YOU GET</span>
-              <h2>Clear details.<br/><em>No guesswork.</em></h2>
-              <div className="featureGridV3">{p.features.map((feature,i)=><article key={feature}><span>0{String(i+1).padStart(2,"0")}</span><strong>{feature}</strong><p>Included with this product as described on the product listing.</p></article>)}</div>
-            </Reveal>
-            <Reveal className="productAsideV3" delay={100}>
-              <div><span>DELIVERY</span><strong>{p.delivery}</strong></div>
-              <div><span>SUPPORT</span><strong>{p.support || "Store support is available for product and order questions."}</strong></div>
-              <div><span>FORMAT</span><strong>{p.type === "Software" ? "Windows desktop software" : "Digital bundle / online access"}</strong></div>
-            </Reveal>
-          </section>
-
-          <section className="processV3">
-            <div className="sectionEyebrowV3">HOW IT WORKS</div>
-            <div className="processTrack">
-              <div><b>01</b><strong>Review</strong><p>Check the product details, requirements, delivery method and pricing.</p></div>
-              <div><b>02</b><strong>Purchase</strong><p>{hasPricing ? "Choose your plan and continue through the configured checkout." : "Contact support while pricing and purchase options are being finalized."}</p></div>
-              <div><b>03</b><strong>Access</strong><p>Receive the digital delivery or activation instructions associated with the product.</p></div>
-            </div>
-          </section>
-
-          <section className="productFinalV3">
-            <div><span className="eyebrow">KEEP EXPLORING</span><h2>One product today.<br/><em>More useful drops ahead.</em></h2><Link className="button buttonDark" href="/products">Back to the shop ↗</Link></div>
-          </section>
+          {bundle ? <>
+            <section className="bundleHero">
+              <Reveal className="bundleHeroCopy"><span className="eyebrow">DIGITAL WEBSITE BUNDLE / LIFETIME ACCESS</span><h1>Launch your next <em>website faster.</em></h1><p>A practical website bundle for people who want ready-made templates, plugins, training and landing-page resources instead of starting every project from zero.</p><div className="bundleHeroActions"><BuyNow slug={p.slug} plan={plan}/><Link className="button buttonLight" href="#whats-included">See what is included ↓</Link></div><div className="bundleTrust"><span>600+ WordPress templates</span><span>500+ Shopify templates</span><span>Lifetime access</span><span>Video training</span></div></Reveal>
+              <Reveal className="bundleHeroVisual" delay={100}><div className="bundleVisualTop"><span>WEBSITE KIT / 01</span><b>LAUNCH OFFER</b></div><Image src={p.image || "/website-bundle-thumbnail.svg"} alt="Digital Website Bundle website template collection" width={1200} height={900} priority /><div className="bundleVisualBottom"><span>Digital Products Bundle</span><strong>Templates / Plugins / Training</strong></div></Reveal>
+            </section>
+            <section className="bundleOfferBar"><div><span>LAUNCH OFFER</span><strong>₹249</strong><small>Lifetime digital access</small></div><div><span>WHAT'S INSIDE</span><strong>2000+</strong><small>Website and template resources across the supplied collection</small></div><div><span>DELIVERY</span><strong>Digital</strong><small>Access supplied after successful payment</small></div></section>
+            <section className="bundleStory"><div><span className="eyebrow">THE PROBLEM</span><h2>Stop building every website <em>from a blank screen.</em></h2></div><div><p>Starting a website from scratch can mean hours of layout work before you get to the part that makes the business unique. This bundle is positioned as a starting library: choose a suitable template, install it, customize the content and move forward.</p><p>You still control the final website, branding, content and hosting. The bundle gives you more starting points and supporting resources.</p></div></section>
+            <section className="bundleIncluded" id="whats-included"><div className="bundleSectionHead"><span className="eyebrow">WHAT YOU GET</span><h2>A library built around <em>speed and choice.</em></h2></div><div className="bundleBenefitsGrid">{bundleBenefits.map(([num,title,desc])=><Reveal key={num}><article><span>{num}</span><h3>{title}</h3><p>{desc}</p></article></Reveal>)}</div></section>
+            <section className="bundleNumbers"><div><strong>600+</strong><span>Customizable WordPress templates</span></div><div><strong>500+</strong><span>Shopify template resources</span></div><div><strong>400+</strong><span>Digital-product landing pages</span></div><div><strong>Lifetime</strong><span>Access with updates as supplied</span></div></section>
+            <section className="bundleAudience"><div className="bundleDarkIntro"><span className="eyebrow">WHO IT'S FOR</span><h2>Useful if you need to <em>launch, customize or sell.</em></h2><p>Choose the bundle when a strong starting template can save you repetitive design and setup work.</p></div><div className="bundleAudienceGrid">{audience.map((x,i)=><div key={x}><b>0{i+1}</b><strong>{x}</strong></div>)}</div></section>
+            <section className="bundleHow"><div className="bundleSectionHead"><span className="eyebrow">HOW TO USE IT</span><h2>Pick. Install. <em>Customize.</em></h2></div><div className="bundleSteps"><article><b>01</b><h3>Choose a starting point</h3><p>Browse the supplied website and template resources and select a layout close to your project.</p></article><article><b>02</b><h3>Install and edit</h3><p>Use the supplied resources and training to install, replace content and customize the design.</p></article><article><b>03</b><h3>Launch the website</h3><p>Connect your own domain and hosting, finish your content and publish when the site is ready.</p></article></div></section>
+            <section className="bundleOffer"><div><span className="eyebrow">CURRENT STORE OFFER</span><h2>Get the bundle for <em>₹249.</em></h2><p>One-time digital purchase. Access is delivered after successful payment through the Digital Products Bundle order flow.</p></div><div className="bundlePriceBox"><span>LAUNCH OFFER</span><strong>₹249</strong><small>Lifetime access</small><BuyNow slug={p.slug} plan={plan}/></div></section>
+            <section className="bundleFaq"><div className="bundleSectionHead"><span className="eyebrow">FAQ</span><h2>Before you <em>buy.</em></h2></div><div>{[["Are the templates editable?","Yes. The bundle is intended for customization. The exact editing workflow depends on the individual template and the platform it was designed for."],["Can I use these resources on my existing website?","Where the supplied template or plugin supports your platform and setup, you can use the resources with an existing website. Check the specific resource requirements before installation."],["Are Shopify templates included?","Yes. The bundle listing includes a collection of Shopify template resources in addition to WordPress resources."],["Is training included?","Yes. Video training is included as part of the bundle resources."],["Is this suitable for someone who is not technical?","The bundle is designed to reduce the amount of starting work, but website setup still involves hosting, installation and customization. The included training is intended to make that process easier."],["How do I receive the bundle?","After successful payment, digital access instructions are delivered through the store's order flow. Support is available if you have an access or delivery issue."]].map(([q,a],i)=><details key={q}><summary><span>0{i+1}</span><strong>{q}</strong><b>+</b></summary><p>{a}</p></details>)}</div></section>
+            <section className="bundleFinal"><span className="eyebrow">DIGITAL PRODUCTS BUNDLE</span><h2>Build less from scratch. <em>Launch more.</em></h2><p>Get the website bundle and start with a library instead of an empty canvas.</p><div><BuyNow slug={p.slug} plan={plan}/><Link className="button buttonLight" href="/contact">Need help? Contact us ↗</Link></div><small>Product resources are supplied digitally. Availability and included items may change as the bundle is updated.</small></section>
+          </> : <>
+            <section className="productHeroV3"><Reveal className="productVisualV3"><div className="productVisualTop"><span>{p.type}</span><b>{p.badge || "DIGITAL"}</b></div><div className="productDisplay"><Image src={p.image || "/website-bundle-thumbnail.svg"} alt={p.name} width={1200} height={900}/></div><div className="productVisualBottom"><span>Digital delivery</span><span>01 / 01</span></div></Reveal><Reveal className="productPurchaseV3" delay={120}><span className="eyebrow">{p.category}</span><h1>{p.name}</h1><p>{p.shortDescription}</p><div className="priceLabel"><span>{hasPricing ? "STARTING FROM" : "PRICING"}</span><strong>{hasPricing ? p.pricing?.[0]?.price : "Coming soon"}</strong></div>{hasPricing && <div className="plansV3">{p.pricing?.map((x)=><div className={"planV3 "+(x.label===plan?"selected":"")} key={x.label}><span><b>{x.label}</b><small>{x.note}</small></span><strong>{x.price}</strong></div>)}</div>}<div className="productActionsV3">{hasPricing ? <><BuyNow slug={p.slug} plan={plan}/><AddToCart slug={p.slug} plan={plan}/></> : <Link className="button buttonDark" href="/contact">Ask about this product <span>↗</span></Link>}</div><div className="trustLineV3"><span>SECURE PAYMENT</span><span>DIGITAL DELIVERY</span><span>SUPPORT AVAILABLE</span></div></Reveal></section>
+            <section className="productInfoV3"><Reveal className="productInfoMain"><span className="eyebrow">WHAT YOU GET</span><h2>Clear details.<br/><em>No guesswork.</em></h2><div className="featureGridV3">{p.features.map((feature,i)=><article key={feature}><span>0{String(i+1).padStart(2,"0")}</span><strong>{feature}</strong><p>Included with this product as described on the product listing.</p></article>)}</div></Reveal><Reveal className="productAsideV3" delay={100}><div><span>DELIVERY</span><strong>{p.delivery}</strong></div><div><span>SUPPORT</span><strong>{p.support || "Store support is available for product and order questions."}</strong></div><div><span>FORMAT</span><strong>{p.type === "Software" ? "Windows desktop software" : "Digital bundle / online access"}</strong></div></Reveal></section>
+            <section className="processV3"><div className="sectionEyebrowV3">HOW IT WORKS</div><div className="processTrack"><div><b>01</b><strong>Review</strong><p>Check product details, requirements, delivery method and pricing.</p></div><div><b>02</b><strong>Purchase</strong><p>Choose your plan and continue through the configured checkout.</p></div><div><b>03</b><strong>Access</strong><p>Receive the digital delivery or activation instructions associated with the product.</p></div></div></section>
+            <section className="productFinalV3"><div><span className="eyebrow">KEEP EXPLORING</span><h2>One product today.<br/><em>More useful drops ahead.</em></h2><Link className="button buttonDark" href="/products">Back to the shop ↗</Link></div></section>
+          </>}
         </div>
       </main>
     );
