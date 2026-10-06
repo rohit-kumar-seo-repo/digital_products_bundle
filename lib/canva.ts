@@ -123,9 +123,9 @@ export async function getCanvaAccessToken() {
   return refreshCanvaToken(record);
 }
 
-export async function canvaRequest(path: string, init: RequestInit = {}) {
+export async function canvaRequest(path: string, init: RequestInit = {}): Promise<Response | null> {
   const token = await getCanvaAccessToken();
-  if (!token) return { response: null, data: null };
+  if (!token) return null;
 
   const response = await fetch("https://api.canva.com/rest/v1" + path, {
     ...init,
