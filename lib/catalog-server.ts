@@ -12,7 +12,7 @@ export async function getCatalogProducts(): Promise<Product[]> {
 export async function getCatalogProduct(slug: string): Promise<Product | undefined> {
   const product = products.find((item) => item.slug === slug);
   if (!product) return undefined;
-  const overrides = await readCanvaImageManifest().catch(() => ({}));
+  const overrides = await readCanvaImageManifest().catch(() => ({} as Record<string, { url: string; designId: string; updatedAt: string }));
   return {
     ...product,
     image: overrides[slug]?.url || product.image,
