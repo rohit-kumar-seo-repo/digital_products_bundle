@@ -83,6 +83,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  if (slug === "digital-website-bundle") {
+    return {
+      title: "Digital Website Bundle — Premium Website Templates & Resources",
+      description: "Get a digital website bundle with WordPress templates, Shopify resources, plugins, video training and digital-product landing pages.",
+      keywords: ["website templates bundle","WordPress templates","premium WordPress templates","Shopify templates","website template bundle","landing page templates","digital website bundle"],
+      alternates: { canonical: "/products/digital-website-bundle" },
+      openGraph: {
+        title: "Digital Website Bundle — Premium Website Templates & Resources",
+        description: "Website templates, plugins, training and landing-page resources to help you launch faster.",
+        type: "website",
+        url: "https://digitalproductsbundle.in/products/digital-website-bundle",
+        images: [{ url: "https://digitalproductsbundle.in/website-bundle-thumbnail.svg" }],
+      },
+    };
+  }
+
   return {
     title: p.name,
     description: p.shortDescription,
