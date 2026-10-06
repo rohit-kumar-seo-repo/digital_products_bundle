@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         description:
           "Windows software for WhatsApp bulk messaging, personalization, media, smart delays, analytics and automation.",
         type: "website",
-        images: [{ url: "https://wasender.me/hero-mockup.jpg" }],
+        images: [{ url: "https://digitalproductsbundle.in/wa-sender-thumbnail.svg" }],
       },
     };
   }
@@ -176,7 +176,7 @@ export default async function ProductPage({
           </Reveal>
           <Reveal className="waHeroVisual" delay={100}>
             <div className="waVisualBadge">WA SENDER / DESKTOP</div>
-            <Image src="https://wasender.me/hero-mockup.jpg" alt="WA Sender WhatsApp bulk messaging software dashboard" width={1200} height={760} priority />
+            <Image src={p.image || "/wa-sender-thumbnail.svg"} alt="WA Sender WhatsApp bulk sender software for Windows" width={1200} height={900} priority />
             <div className="waVisualCaption"><span>WhatsApp Web-style workflow</span><b>Windows software</b></div>
           </Reveal>
         </section>
