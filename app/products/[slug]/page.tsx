@@ -100,6 +100,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  if (slug === "small-business-social-media-kit") {
+    return {
+      title: "Small Business Social Media Canva Templates — 12 Editable Posts",
+      description: "Buy 12 editable Canva social media templates for small businesses: offers, services, reviews, WhatsApp promotions, booking CTAs and content planning.",
+      keywords: ["small business Canva templates","social media Canva templates","Canva social media templates","small business social media templates","editable Canva templates","business Instagram templates","Canva marketing templates"],
+      alternates: { canonical: "/products/small-business-social-media-kit" },
+      openGraph: {
+        title: "Small Business Social Media Canva Templates",
+        description: "12 editable Canva templates for small business marketing, offers, services, reviews and customer CTAs.",
+        type: "website",
+        url: "https://digitalproductsbundle.in/products/small-business-social-media-kit",
+        images: [{ url: "https://digitalproductsbundle.in/small-business-social-kit-thumbnail.svg" }],
+      },
+    };
+  }
+
   return {
     title: p.name,
     description: p.shortDescription,
