@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProduct, products } from "@/lib/products";
+import { getCatalogProduct } from "@/lib/catalog-server";
 import { AddToCart, BuyNow } from "@/components/store";
 import { Reveal } from "@/components/motion";
 
@@ -112,7 +113,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = getProduct(slug);
+  const p = await getCatalogProduct(slug);
   if (!p) notFound();
 
   if (slug !== "wa-sender") {
