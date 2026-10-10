@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { getProduct } from "@/lib/products";
 import { createRazorpayPaymentLink, razorpayConfigured } from "@/lib/razorpay";
-import { paymentUrl, siteUrl, supabaseKey, supabaseUrl } from "@/lib/store-config";
+import { siteUrl, supabaseKey, supabaseUrl } from "@/lib/store-config";
 
 type RequestedItem = { product: string; plan?: string; quantity?: number };
 type PricedItem = { product: NonNullable<ReturnType<typeof getProduct>>; plan: string; amountPaise: number; quantity: number; productId?: string };
@@ -19,6 +19,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     if (!supabaseUrl || !supabaseKey) return NextResponse.json({ error: "Checkout is being configured. Please try again shortly." }, { status: 503 });
+    if (!razorpayConfigured()) return NextResponse.json({ error: "Secure checkout is temporarily unavailable. Please contact support rather than using a generic payment link." }, { status: 503 });
     const email = String(body.email || "").trim().toLowerCase();
     const name = String(body.name || "").trim();
     const phone = String(body.phone || "").trim();
