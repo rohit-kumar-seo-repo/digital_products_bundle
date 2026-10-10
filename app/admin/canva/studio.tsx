@@ -73,7 +73,7 @@ export default function CanvaStudio() {
             <h1 style={{fontSize:"clamp(42px,7vw,82px)",lineHeight:.95,margin:"14px 0"}}>Create in Canva.<br/><i>Publish here.</i></h1>
             <p style={{maxWidth:700,lineHeight:1.7,color:"#555"}}>Connect your Canva account, choose a product design and publish a clean PNG directly to the live product page. Future Canva updates replace the same product asset automatically.</p>
           </div>
-          {connected ? <button onClick={disconnect} style={button("light")}>Disconnect Canva</button> : <a href="/api/integrations/canva/connect" style={button("dark")}>Connect Canva</a>}
+          {connected ? <div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button onClick={disconnect} style={button("light")}>Disconnect Canva</button><button onClick={async()=>{await fetch("/api/admin/canva-session",{method:"DELETE"});window.location.href="/admin/canva/login";}} style={button("light")}>Sign out</button></div> : <div style={{display:"flex",gap:8,flexWrap:"wrap"}}><a href="/api/integrations/canva/connect" style={button("dark")}>Connect Canva</a><button onClick={async()=>{await fetch("/api/admin/canva-session",{method:"DELETE"});window.location.href="/admin/canva/login";}} style={button("light")}>Sign out</button></div>}
         </div>
 
         {!connected ? (
