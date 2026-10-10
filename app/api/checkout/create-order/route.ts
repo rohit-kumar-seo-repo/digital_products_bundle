@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     }))) });
     if (!itemRes.ok) return NextResponse.json({ error: "Unable to prepare your order. Please contact support before retrying if an order number was shown." }, { status: 500 });
 
-    let checkoutUrl = paymentUrl;
+    let checkoutUrl = "";
     if (razorpayConfigured()) {
       try {
         const description = priced.length === 1 ? priced[0].product.name + " — " + priced[0].plan : "Digital Products Bundle order (" + priced.length + " items)";
