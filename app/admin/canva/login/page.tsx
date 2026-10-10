@@ -1,27 +1,22 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function CanvaAdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const router = useRouter();
-  const params = useSearchParams();
   async function submit(event: FormEvent) {
-    event.preventDefault();
-    setBusy(true); setError("");
+    event.preventDefault(); setBusy(true); setError("");
     try {
       const response = await fetch("/api/admin/canva-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unable to sign in.");
+      const params = new URLSearchParams(window.location.search);
       const next = params.get("next") || "/admin/canva";
-      router.replace(next.startsWith("/admin/canva") ? next : "/admin/canva");
-      router.refresh();
-    } catch (e) { setError(e instanceof Error ? e.message : "Unable to sign in."); }
-    finally { setBusy(false); }
+      window.location.assign(next.startsWith("/admin/canva") ? next : "/admin/canva");
+    } catch (e) { setError(e instanceof Error ? e.message : "Unable to sign in."); setBusy(false); }
   }
   return <main style={{ minHeight: "75vh", display: "grid", placeItems: "center", padding: 24, background: "#f5f3ef" }}>
     <section style={{ width: "min(440px,100%)", background: "#fff", border: "1px solid #deded8", borderRadius: 20, padding: 32 }}>
