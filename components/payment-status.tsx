@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type OrderItem = { productName: string; variantName: string | null; quantity: number; accessUrl: string | null; delivery: string; support: string | null };\ntype Order = { orderNumber: string; status: string; amountPaise: number; currency: string; paidAt: string | null; productName: string; variantName: string | null; accessUrl: string | null; delivery: string; support: string | null; emailSent: boolean; items?: OrderItem[] };
+type OrderItem = { productName: string; variantName: string | null; quantity: number; accessUrl: string | null; delivery: string; support: string | null };
+type Order = { orderNumber: string; status: string; amountPaise: number; currency: string; paidAt: string | null; productName: string; variantName: string | null; accessUrl: string | null; delivery: string; support: string | null; emailSent: boolean; items?: OrderItem[] };
 export default function PaymentStatus({ orderNumber, initialOrder }: { orderNumber: string; initialOrder: Order | null }) {
   const [order, setOrder] = useState<Order | null>(initialOrder);
   const [checking, setChecking] = useState(initialOrder?.status !== "PAID");
