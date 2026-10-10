@@ -11,7 +11,7 @@ export default function ContactForm() {
       const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(form.entries())) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unable to send your message.");
-      setState("sent"); setMessage("Your message has been sent. Keep your order number handy if you need to follow up."); e.currentTarget.reset();
+      setState("sent"); setMessage("Your message has been sent. Keep your order number handy if you need to follow up."); formElement.reset();
     } catch (error) { setState("error"); setMessage(error instanceof Error ? error.message : "Unable to send your message."); }
   }
   return <form className="checkoutCard" onSubmit={submit}>
