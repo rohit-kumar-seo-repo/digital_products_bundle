@@ -57,10 +57,10 @@ export default function Cart() {
             <aside className="summaryV3">
               <span className="eyebrow">YOUR ORDER</span>
               <strong>{cart.length} ITEM{cart.length > 1 ? "S" : ""}</strong>
-              <p>Final pricing follows the selected product plan during checkout.</p>
+              <p>All selected products and plans will be validated again at checkout before payment.</p>
               <Link
                 className="button buttonDark full"
-                href={"/checkout?product=" + cart[0].slug + "&plan=" + encodeURIComponent(cart[0].plan || "Standard")}
+                href={"/checkout?items=" + encodeURIComponent(JSON.stringify(cart.map((item) => ({ product: item.slug, plan: item.plan || "Standard", quantity: 1 }))))}
               >
                 Continue to checkout ↗
               </Link>
