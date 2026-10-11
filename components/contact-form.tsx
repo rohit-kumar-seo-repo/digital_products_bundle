@@ -6,7 +6,8 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); setState("sending"); setMessage("");
-    const form = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
     try {
       const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(form.entries())) });
       const data = await response.json();
