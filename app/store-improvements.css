@@ -37,3 +37,17 @@
 ::selection{background:#d7fc55;color:#111}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
 @media(max-width:560px){.marqueeTrack,.trustMarqueeTrack{animation-duration:44s}.productVisual::after{display:none}}
+
+
+/* Live catalog section added to the homepage */
+.catalogPulse{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end;padding-top:42px;padding-bottom:68px;border-bottom:1px solid var(--line)}
+.catalogPulseIntro h2{font-size:clamp(32px,4vw,50px);letter-spacing:-.07em;line-height:.95;margin:12px 0}
+.catalogPulseIntro h2 em{font-style:normal;color:#777}
+.catalogPulseIntro p{max-width:460px;font-size:13px;line-height:1.7;color:var(--muted);margin:0}
+.catalogPulseStats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.catalogPulseStats>div{padding:15px 12px 0 0;border-right:1px solid var(--line);margin-right:12px}
+.catalogPulseStats>div:last-child{border:0;margin:0}
+.catalogPulseStats strong,.catalogPulseStats span{display:block}
+.catalogPulseStats strong{font-size:32px;letter-spacing:-.06em}
+.catalogPulseStats span{font-size:9px;line-height:1.5;color:var(--muted);margin-top:4px}
+@media(max-width:760px){.catalogPulse{grid-template-columns:1fr;gap:25px;padding-top:35px;padding-bottom:45px}.catalogPulseStats strong{font-size:27px}}
