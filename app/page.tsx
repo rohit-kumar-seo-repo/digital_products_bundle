@@ -3,7 +3,7 @@ import {products,categories} from "@/lib/products";
 import {ProductCard,TrustStrip} from "@/components/store";
 import {Reveal} from "@/components/motion";
 const tickerItems=["DIGITAL PRODUCTS","INSTANT ACCESS","CLEAR PRICING","SECURE CHECKOUT","REAL SUPPORT","NO PHYSICAL SHIPPING"];
-export default function Home(){const featured=products.slice(0,4);return <main className="homeV2">
+export default function Home(){const featured=products;return <main className="homeV2">
 <div className="topMarquee"><div className="marqueeTrack">{[...tickerItems,...tickerItems].map((x,i)=><span key={i}>{x}<b>+</b></span>)}</div></div>
 <section className="heroV2"><div className="heroGridGlow"/><div className="container heroV2Inner"><Reveal className="heroV2Copy"><div className="heroKicker"><span className="pulseDot"/> DIGITAL PRODUCTS BUNDLE <span>EST. 2026</span></div><h1>Buy useful.<br/><em>Get moving.</em></h1><p>Practical software, templates and digital resources — selected for people who want a faster way to get work done.</p><div className="heroV2Actions"><Link className="button buttonDark magneticV2" href="/products">Browse the store <span>↗</span></Link><Link className="heroSecondary" href="#how-it-works">How it works <span>↓</span></Link></div><div className="heroMiniTrust"><span>✓ Clear product details</span><span>✓ Secure payment</span><span>✓ Digital delivery</span></div></Reveal>
 <Reveal className="heroReelWrap" delay={120}><div className="reelTop"><span>FEATURED DROP</span><span>SCROLL TO EXPLORE</span></div><div className="heroReel">
