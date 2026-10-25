@@ -1,3 +1,4 @@
+import type {Metadata} from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 
@@ -31,9 +32,10 @@ const groups = [
   },
 ];
 
-export const metadata = {
+export const metadata:Metadata = {
   title: "Help & FAQs | Digital Products Bundle",
   description: "Clear answers about digital products, payment, delivery, refunds and customer support.",
+  alternates: { canonical: "/faq" },
 };
 
 export default function FAQ() {

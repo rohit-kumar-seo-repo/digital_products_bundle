@@ -1,4 +1,6 @@
+import type {Metadata} from "next";
 import Link from "next/link";
+export const metadata:Metadata={alternates:{canonical:"/"}};
 import {products,categories} from "@/lib/products";
 import {ProductCard,TrustStrip} from "@/components/store";
 import {Reveal} from "@/components/motion";
