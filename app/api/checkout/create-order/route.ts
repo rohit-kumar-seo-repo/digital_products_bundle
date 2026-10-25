@@ -41,6 +41,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Product price is not configured." }, { status: 400 });
     }
 
+    const pr = await db("products?slug=eq." + encodeURIComponent(p.slug) + "&select=id");
+    if (!pr.ok) {
+      return NextResponse.json({ error: "Unable to prepare your order." }, { status: 500 });
+    }
+
+    const rows = await pr.json();
+    if (!rows[0]?.id) {
+      return NextResponse.json({ error: "Product is not available for checkout." }, { status: 400 });
+    }
+
     const orderNumber = "DPB-" + crypto.randomUUID().replace(/-/g, "").slice(0, 20).toUpperCase();
 
     const ins = await db("orders", {
@@ -63,16 +73,6 @@ export async function POST(req: Request) {
     }
 
     const order = (await ins.json())[0];
-
-    const pr = await db("products?slug=eq." + encodeURIComponent(p.slug) + "&select=id");
-    if (!pr.ok) {
-      return NextResponse.json({ error: "Unable to prepare your order." }, { status: 500 });
-    }
-
-    const rows = await pr.json();
-    if (!rows[0]?.id) {
-      return NextResponse.json({ error: "Product is not available for checkout." }, { status: 400 });
-    }
 
     const itemRes = await db("order_items", {
       method: "POST",

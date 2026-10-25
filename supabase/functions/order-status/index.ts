@@ -36,6 +36,13 @@ export default {
       product = result.data;
     }
 
+    const siteUrl = Deno.env.get("SITE_URL") || "https://digitalproductsbundle.in";
+    const accessUrl = order.status === "PAID"
+      ? item?.product_name === "Local SEO & Google Business Profile Agency Toolkit"
+        ? siteUrl + "/api/download/local-seo-toolkit?order=" + encodeURIComponent(order.order_number)
+        : product?.drive_url || null
+      : null;
+
     return Response.json({
       order: {
         orderNumber: order.order_number,
@@ -45,7 +52,7 @@ export default {
         paidAt: order.paid_at,
         productName: item?.product_name || "Digital product",
         variantName: item?.variant_name || null,
-        accessUrl: order.status === "PAID" ? product?.drive_url || null : null,
+        accessUrl,
         delivery: product?.delivery || "Your digital product will be delivered after payment verification.",
         support: product?.support || null,
         emailSent: Boolean(order.email_sent_at),
