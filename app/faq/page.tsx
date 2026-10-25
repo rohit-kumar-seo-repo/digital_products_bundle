@@ -1,6 +1,5 @@
 import type {Metadata} from "next";
 import Link from "next/link";
-export const metadata:Metadata={title:"Frequently Asked Questions | Digital Products Bundle",description:"Answers about digital product purchases, payments, delivery, support and refunds.",alternates:{canonical:"/faq"}};
 import { Reveal } from "@/components/motion";
 
 const groups = [
@@ -33,9 +32,10 @@ const groups = [
   },
 ];
 
-export const metadata = {
+export const metadata:Metadata = {
   title: "Help & FAQs | Digital Products Bundle",
   description: "Clear answers about digital products, payment, delivery, refunds and customer support.",
+  alternates: { canonical: "/faq" },
 };
 
 export default function FAQ() {
