@@ -405,3 +405,141 @@ body{background:var(--bg);color:var(--ink)}
  html{scroll-behavior:auto}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Layout QA fixes — avoid clipped cards, invisible hover text, and footer overflow. */
+:root { --page-gutter: clamp(16px, 3vw, 44px); }
+html { scroll-padding-top: 100px; }
+:where([id]) { scroll-margin-top: 100px; }
+img { max-width: 100%; }
+.siteFooter {
+  width: min(1180px, calc(100% - 48px));
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+.footerTop {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 45px);
+  width: 100%;
+  min-width: 0;
+}
+.footerTop > div { min-width: 0; }
+.footerTop > div:first-child { min-width: 0; }
+.footerTop > div:first-child .footerBrandLogo {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: flex-start;
+}
+.footerBrandLogo img { width: min(245px, 100%); max-width: 100%; height: auto; }
+.footerTop > div:first-child p {
+  width: 100%;
+  max-width: 300px;
+  padding-left: 12px;
+  overflow-wrap: anywhere;
+}
+.footerTop a, .footerMaintained a, .footerBottom span { overflow-wrap: anywhere; }
+.footerMaintained {
+  grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 28px);
+  width: 100%;
+  min-width: 0;
+}
+.footerMaintained > div { min-width: 0; padding-right: clamp(12px, 2vw, 25px); }
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 24px;
+  min-width: 0;
+}
+.footerBottom span { min-width: 0; max-width: 100%; }
+.categoryScrollerTrack {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  padding: 4px 0 18px;
+}
+.categoryTile {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 255px;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+.categoryTile strong {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.categoryTile small {
+  color: #74766d;
+  overflow-wrap: anywhere;
+}
+.categoryTile b { color: var(--ink); }
+.categoryTile:hover,
+.categoryTile:focus-visible {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: #f5f5ee;
+  transform: translateY(-4px);
+}
+.categoryTile:hover > span,
+.categoryTile:focus-visible > span { color: #aeb19f; }
+.categoryTile:hover strong,
+.categoryTile:focus-visible strong { color: #f5f5ee; }
+.categoryTile:hover small,
+.categoryTile:focus-visible small { color: #c1c4b7; }
+.categoryTile:hover b,
+.categoryTile:focus-visible b { color: var(--accent); }
+.categoryTile:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.shopCategoryRow,
+[id^="category-"] { scroll-margin-top: 105px; }
+
+@media (max-width: 1100px) {
+  .categoryScrollerTrack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footerTop { grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .footerTop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 22px; }
+  .footerTop > div:first-child { grid-column: 1 / -1; }
+  .footerMaintained { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footerMaintained > div:nth-child(2n),
+  .footerMaintained > div:last-child { border-right: 0; }
+  .categoryScrollerTrack { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+}
+@media (max-width: 560px) {
+  .siteFooter { width: calc(100% - 28px); padding: 42px 0 22px; }
+  .footerTop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 16px; }
+  .footerTop > div:first-child { grid-column: 1 / -1; }
+  .footerTop > div:first-child p { padding-left: 8px; }
+  .footerBrandLogo img { width: min(220px, 100%); max-height: 78px; }
+  .footerMaintained { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .footerMaintained > div,
+  .footerMaintained > div:nth-child(2n),
+  .footerMaintained > div:last-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  .footerMaintained > div:last-child { border-bottom: 0; }
+  .footerBottom { display: grid; grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  .categoryScroller { padding: 62px 0; }
+  .categoryScrollerTrack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .categoryTile { height: 222px; padding: 15px; border-radius: 14px; }
+  .categoryTile strong { font-size: clamp(17px, 4.7vw, 21px); line-height: 1.02; }
+  .categoryTile small { font-size: 10px; line-height: 1.45; }
+  .categoryTile b { margin-top: 14px; }
+}
+@media (max-width: 360px) {
+  .categoryScrollerTrack { grid-template-columns: minmax(0, 1fr); }
+  .categoryTile { height: auto; min-height: 190px; }
+  .categoryTile strong { font-size: 24px; }
+}
