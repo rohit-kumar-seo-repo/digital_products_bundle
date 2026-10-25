@@ -56,6 +56,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProduct(slug);
   if (!p) return {};
 
+  if (slug === "local-seo-agency-toolkit") {
+    return {
+      title: "Local SEO Agency Toolkit — GBP Audit, Keyword Map & Reporting Templates",
+      description: "Get an editable Local SEO and Google Business Profile toolkit with audit checklists, keyword mapping, review response starters, a 30-day content plan and reporting sheets.",
+      keywords: ["local SEO toolkit","Google Business Profile audit template","local SEO reporting template","GBP content calendar","local keyword mapping spreadsheet","local SEO agency templates"],
+      alternates: { canonical: "/products/local-seo-agency-toolkit" },
+      openGraph: {
+        title: "Local SEO Agency Toolkit",
+        description: "Editable local SEO templates for freelancers and agencies.",
+        type: "website",
+        url: "https://digitalproductsbundle.in/products/local-seo-agency-toolkit",
+        images: [{ url: "https://digitalproductsbundle.in/local-seo-toolkit.svg" }],
+      },
+    };
+  }
+
   if (slug === "wa-sender") {
     return {
       title: "WA Sender — WhatsApp Bulk Sender Software for Windows",
@@ -131,6 +147,84 @@ export default async function ProductPage({
   const { slug } = await params;
   const p = await getCatalogProduct(slug);
   if (!p) notFound();
+
+  if (slug === "local-seo-agency-toolkit") {
+    const plan = p.pricing?.[0]?.label || "Full Toolkit";
+    const included = [
+      ["01", "GBP audit checklist", "Review profile accuracy, categories, contact details, content, reviews, website alignment and measurement."],
+      ["02", "Local keyword map", "Map a primary search intent to a useful service page and record actual query performance."],
+      ["03", "Review response starters", "Adapt practical response frameworks for positive, constructive and sensitive feedback."],
+      ["04", "30-day content calendar", "Plan useful posts around real services, FAQs, customer questions and genuine offers."],
+      ["05", "Monthly reporting sheet", "Summarize visibility, website actions, qualified leads, completed work and next steps."],
+      ["06", "Client onboarding form", "Collect scope, business details, goals, access requirements and approval workflows."],
+      ["07", "Landing-page QA checklist", "Check intent, content quality, local relevance, CTA, technical SEO and tracking."],
+      ["08", "Quick-start guide", "Follow a repeatable workflow and avoid misleading claims, fake reviews and unsupported ranking promises."],
+    ];
+    return (
+      <main className="localSeoToolkitPage">
+        <div className="container">
+          <div className="productCrumb"><Link href="/products">Shop</Link><span>/</span><Link href="/products#category-local-seo">Local SEO</Link><span>/</span><b>Agency Toolkit</b></div>
+          <section className="lstHero">
+            <Reveal className="lstHeroCopy">
+              <span className="eyebrow">LOCAL SEO / WORKFLOW TOOLKIT</span>
+              <h1>Spend less time rebuilding the same <em>SEO process.</em></h1>
+              <p>Editable working templates for freelancers and small agencies who manage local search, Google Business Profiles and client reporting.</p>
+              <div className="lstHeroActions"><BuyNow slug={p.slug} plan={plan}/><Link className="button buttonLight" href="#included">See what's inside ↓</Link></div>
+              <div className="lstHeroFacts"><span>8 practical templates</span><span>Editable files</span><span>One-time purchase</span></div>
+            </Reveal>
+            <Reveal className="lstHeroVisual" delay={100}>
+              <div className="lstVisualTop"><span>DPB / TOOLKIT 01</span><b>VERSION 1.0</b></div>
+              <Image src="/local-seo-toolkit.svg" alt="Local SEO Agency Toolkit preview showing audit, keyword mapping, content planning and reporting templates" width={1200} height={900} priority />
+              <div className="lstVisualBottom"><span>Audit / Plan / Optimize / Report</span><strong>₹399</strong></div>
+            </Reveal>
+          </section>
+
+          <section className="lstProblem">
+            <div><span className="eyebrow">BUILT FOR REPEATABLE WORK</span><h2>Stop starting each client task <em>from a blank sheet.</em></h2></div>
+            <p>Profile audits, keyword maps, review responses, content planning and monthly reports often repeat from client to client. This toolkit gives you editable starting points so you can spend more time applying your judgement and less time formatting documents.</p>
+          </section>
+
+          <section className="lstIncluded" id="included">
+            <div className="lstSectionHead"><span className="eyebrow">WHAT'S INCLUDED</span><h2>Seven working sheets. <em>One clear workflow.</em></h2><p>Use the templates as a starting point, personalize them for each business and record evidence instead of assumptions.</p></div>
+            <div className="lstFeatureGrid">{included.map(([num,title,desc])=><Reveal key={num}><article><span>{num}</span><h3>{title}</h3><p>{desc}</p></article></Reveal>)}</div>
+          </section>
+
+          <section className="lstWorkflow">
+            <div className="lstWorkflowIntro"><span className="eyebrow">HOW TO USE IT</span><h2>From first audit to <em>monthly review.</em></h2></div>
+            <div className="lstWorkflowSteps">
+              <article><b>01</b><strong>Audit</strong><p>Record profile issues, evidence, priority, owner and due date.</p></article>
+              <article><b>02</b><strong>Map intent</strong><p>Match real search intent to useful pages and track verified performance.</p></article>
+              <article><b>03</b><strong>Execute</strong><p>Use the calendar and response starters as prompts, not copy-paste replacements for judgement.</p></article>
+              <article><b>04</b><strong>Report</strong><p>Separate visibility metrics from qualified leads and agreed next actions.</p></article>
+            </div>
+          </section>
+
+          <section className="lstFor">
+            <div><span className="eyebrow">WHO IT'S FOR</span><h2>Made for people doing the <em>work.</em></h2></div>
+            <div className="lstAudience"><span>Local SEO freelancers</span><span>Digital marketing agencies</span><span>Website and SEO consultants</span><span>In-house local marketing teams</span></div>
+          </section>
+
+          <section className="lstFaq">
+            <div className="lstSectionHead"><span className="eyebrow">BEFORE YOU BUY</span><h2>Clear expectations. <em>Useful files.</em></h2></div>
+            <div className="lstFaqList">
+              <details><summary>What format are the templates in?<b>+</b></summary><p>The toolkit downloads as a ZIP containing editable CSV templates that open in Excel, Google Sheets and other spreadsheet tools, plus a quick-start text guide and license.</p></details>
+              <details><summary>Does this include Google or third-party software?<b>+</b></summary><p>No. This is an original set of working templates and guidance. It does not include Google software, paid third-party tools or access to a Google account.</p></details>
+              <details><summary>Will this guarantee better rankings or leads?<b>+</b></summary><p>No. Results depend on the business, competition, website, implementation and many factors outside the toolkit. It provides a repeatable workflow, not a ranking or revenue guarantee.</p></details>
+              <details><summary>Can I use the templates for client work?<b>+</b></summary><p>Yes. You may adapt the templates for your own business and client-service work. You may not resell or redistribute the toolkit itself as a standalone product.</p></details>
+              <details><summary>How is it delivered?<b>+</b></summary><p>After the payment provider confirms payment, the order page offers a protected download link for the toolkit ZIP.</p></details>
+            </div>
+          </section>
+
+          <section className="lstFinal">
+            <span className="eyebrow">LOCAL SEO AGENCY TOOLKIT / VERSION 1.0</span>
+            <h2>Make your next client workflow <em>easier to repeat.</em></h2>
+            <p>Get the editable templates, quick-start guide and license in one download.</p>
+            <div><BuyNow slug={p.slug} plan={plan}/><span>₹399 · one-time payment</span></div>
+          </section>
+        </div>
+      </main>
+    );
+  }
 
   if (slug !== "wa-sender") {
     const hasPricing = Boolean(p.pricing?.length);
