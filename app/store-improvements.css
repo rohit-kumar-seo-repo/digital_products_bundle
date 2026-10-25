@@ -543,3 +543,16 @@ img { max-width: 100%; }
   .categoryTile { height: auto; min-height: 190px; }
   .categoryTile strong { font-size: 24px; }
 }
+
+
+/* Smart sticky navigation: hide on downward scrolling so it never masks a section heading. */
+.siteHeader {
+  transform: translateY(0);
+  transition: transform .22s ease;
+  will-change: transform;
+}
+.siteHeader.siteHeaderHidden { transform: translateY(calc(-100% - 2px)); }
+.siteHeader:focus-within { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .siteHeader { transition: none; }
+}
