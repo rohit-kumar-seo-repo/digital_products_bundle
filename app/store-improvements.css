@@ -809,3 +809,438 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .siteFooter .footerLinkColumn a { transition: none; }
 }
+
+
+/* Section quality pass — cards need consistent inner padding, real gaps and readable rhythm.
+   These rules intentionally reset earlier separator-row styles that were later converted to cards. */
+
+/* WA Sender: the stats strip, process cards and requirements */
+.waStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 34px 0 76px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.waStats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 175px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+}
+.waStats > div:last-child {
+  margin: 0;
+  border: 1px solid var(--line);
+}
+.waStats strong {
+  display: block;
+  color: #777a6f;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .1em;
+}
+.waStats span {
+  display: block;
+  margin: 22px 0 8px;
+  color: var(--ink);
+  font-size: clamp(16px, 1.35vw, 20px);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  overflow-wrap: anywhere;
+}
+.waStats p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.waHow { padding: 25px 0 88px; }
+.waHowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 25px;
+  border: 0;
+  min-width: 0;
+}
+.waHowGrid article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 190px;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+}
+.waHowGrid article:last-child,
+.waHowGrid article:nth-child(2),
+.waHowGrid article:nth-child(2n) {
+  margin: 0;
+  border: 1px solid var(--line);
+}
+.waHowGrid b {
+  color: #777a6f;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .1em;
+}
+.waHowGrid h3 {
+  margin: 26px 0 8px;
+  color: var(--ink);
+  font-size: clamp(16px, 1.45vw, 20px);
+  line-height: 1.18;
+  letter-spacing: -.04em;
+  overflow-wrap: anywhere;
+}
+.waHowGrid p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.waReqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+  border: 0;
+}
+.waReqGrid > span {
+  display: block;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fff;
+  color: #62665b;
+  font-size: 12px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.waReqGrid b {
+  display: block;
+  margin-bottom: 8px;
+  color: #777a6f;
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+
+/* About and shop promise cards: no zero-left-padding / outside-margin leftovers. */
+.infoBlocksV3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 55px;
+  border: 0;
+  min-width: 0;
+}
+.infoV3 .infoBlocksV3 > div,
+.infoV3 .infoBlocksV3 > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 230px;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+}
+.infoBlocksV3 span {
+  color: #777a6f;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .1em;
+}
+.infoBlocksV3 b {
+  display: block;
+  margin: 26px 0 10px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  overflow-wrap: anywhere;
+}
+.infoBlocksV3 p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.shopPromise .promiseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  border: 0;
+  min-width: 0;
+}
+.shopPromise .promiseGrid > div,
+.shopPromise .promiseGrid > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 225px;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid #dfe1d5;
+  border-radius: 13px;
+  background: #f8f8f3;
+  color: var(--ink);
+}
+.shopPromise .promiseGrid b {
+  color: #777a6f;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .1em;
+}
+.shopPromise .promiseGrid strong {
+  display: block;
+  margin: 26px 0 10px;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.16;
+  letter-spacing: -.035em;
+  overflow-wrap: anywhere;
+}
+.shopPromise .promiseGrid p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* Website bundle: convert legacy divider spacing to actual cards. */
+.bundleBenefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+  border: 0;
+  min-width: 0;
+}
+.bundleBenefitsGrid article,
+.bundleBenefitsGrid article:nth-child(3n),
+.bundleBenefitsGrid article:nth-child(2n) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 230px;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+}
+.bundleBenefitsGrid article > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6f7268;
+  font-size: 10px;
+  line-height: 1.2;
+}
+.bundleBenefitsGrid h3 {
+  margin: 27px 0 9px;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -.04em;
+  overflow-wrap: anywhere;
+}
+.bundleBenefitsGrid p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.bundleAudienceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+.bundleAudienceGrid > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid #ffffff24;
+  border-radius: 11px;
+  background: #1a1c16;
+  color: #f4f5ee;
+}
+.bundleAudienceGrid > div strong {
+  min-width: 0;
+  color: #f4f5ee;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.bundleAudienceGrid > div b { flex: 0 0 auto; line-height: 1.4; }
+.bundleSteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  min-width: 0;
+}
+.bundleSteps article {
+  min-width: 0;
+  min-height: 225px;
+  padding: 22px;
+  border-radius: 13px;
+}
+.bundleSteps h3 {
+  margin: 29px 0 10px;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.13;
+  letter-spacing: -.04em;
+  overflow-wrap: anywhere;
+}
+.bundleSteps p {
+  margin: 0;
+  color: #6f7268;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+/* Keep the informational process track editorial, but reduce excessive label/title gaps. */
+.processTrack { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; min-width: 0; }
+.processTrack > div { min-width: 0; margin-right: 0; padding: 0 16px 0 0; }
+.processTrack > div:last-child { margin: 0; }
+.processTrack strong { margin: 24px 0 8px; line-height: 1.18; }
+.processTrack p { margin: 0; font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
+.waUseGrid h3 { margin: 26px 0 8px; line-height: 1.18; overflow-wrap: anywhere; }
+.waPriceCard h3 { margin: 28px 0 5px; }
+.waPriceCard ul { padding-left: 18px; }
+.waPriceCard li { line-height: 1.65; }
+.waRequirements .waReqGrid { margin: 0; }
+
+/* Shared guards for long words and nested grid children across the store. */
+.shopGridV3 > *,
+.v2ProductGrid > *,
+.editorialProducts > *,
+.featureGridV3 > *,
+.waFeatureGrid > *,
+.waPricingGrid > *,
+.lstFeatureGrid > *,
+.lstWorkflowSteps > *,
+.infoBlocksV3 > *,
+.promiseGrid > *,
+.bundleBenefitsGrid > *,
+.bundleSteps > *,
+.bundleAudienceGrid > *,
+.waStats > *,
+.waHowGrid > *,
+.waReqGrid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+.shopGridV3 .revealV2,
+.v2ProductGrid .revealV2,
+.editorialProducts .revealV2,
+.waFeatureGrid .revealV2,
+.waPricingGrid .revealV2,
+.lstFeatureGrid .revealV2,
+.bundleBenefitsGrid .revealV2 {
+  height: 100%;
+  min-width: 0;
+}
+.shopGridV3 .productCard,
+.v2ProductGrid .productCard,
+.editorialProducts .productCard { min-width: 0; }
+
+/* Tablet rhythm */
+@media (max-width: 1000px) {
+  .waStats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 62px; }
+  .waStats > div { margin: 0; padding: 20px; border: 1px solid var(--line); min-height: 155px; }
+  .waStats > div:last-child { margin: 0; border: 1px solid var(--line); }
+  .waHowGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .waHowGrid article,
+  .waHowGrid article:nth-child(2),
+  .waHowGrid article:nth-child(2n),
+  .waHowGrid article:last-child { margin: 0; padding: 20px; border: 1px solid var(--line); }
+  .infoBlocksV3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .infoV3 .infoBlocksV3 > div,
+  .infoV3 .infoBlocksV3 > div:last-child { min-height: 205px; padding: 20px; margin: 0; border: 1px solid var(--line); }
+  .shopPromise .promiseGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .shopPromise .promiseGrid > div,
+  .shopPromise .promiseGrid > div:last-child { min-height: 205px; padding: 20px; margin: 0; border: 1px solid #dfe1d5; }
+  .bundleBenefitsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .bundleBenefitsGrid article,
+  .bundleBenefitsGrid article:nth-child(3n),
+  .bundleBenefitsGrid article:nth-child(2n) { min-height: 210px; padding: 20px; margin: 0; border: 1px solid var(--line); }
+  .bundleSteps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .bundleSteps article { min-height: 205px; padding: 20px; }
+  .bundleAudienceGrid { gap: 9px; }
+  .bundleAudienceGrid > div { padding: 15px; margin: 0; }
+}
+@media (max-width: 620px) {
+  .waStats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 26px 0 48px; }
+  .waStats > div,
+  .waStats > div:last-child { min-height: 165px; padding: 16px; margin: 0; border: 1px solid var(--line); border-radius: 11px; }
+  .waStats span { margin: 19px 0 7px; font-size: 16px; }
+  .waStats p { font-size: 11px; }
+  .waHow { padding: 18px 0 60px; }
+  .waHowGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+  .waHowGrid article,
+  .waHowGrid article:nth-child(2),
+  .waHowGrid article:nth-child(2n),
+  .waHowGrid article:last-child { min-height: 175px; padding: 16px; margin: 0; border: 1px solid var(--line); border-radius: 11px; }
+  .waHowGrid h3 { margin: 22px 0 7px; font-size: 16px; }
+  .waHowGrid p { font-size: 11px; }
+  .waReqGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .waReqGrid > span { padding: 13px; font-size: 11px; }
+  .infoBlocksV3 { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 35px; }
+  .infoV3 .infoBlocksV3 > div,
+  .infoV3 .infoBlocksV3 > div:last-child { min-height: 0; padding: 20px; margin: 0; border: 1px solid var(--line); }
+  .infoBlocksV3 b { margin: 20px 0 8px; font-size: 19px; }
+  .shopPromise { padding: 70px 0; }
+  .shopPromise h2 { margin-bottom: 35px; }
+  .shopPromise .promiseGrid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .shopPromise .promiseGrid > div,
+  .shopPromise .promiseGrid > div:last-child { min-height: 0; padding: 20px; margin: 0; border: 1px solid #dfe1d5; }
+  .shopPromise .promiseGrid strong { margin: 20px 0 8px; font-size: 19px; }
+  .bundleBenefitsGrid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .bundleBenefitsGrid article,
+  .bundleBenefitsGrid article:nth-child(3n),
+  .bundleBenefitsGrid article:nth-child(2n) { min-height: 0; padding: 20px; margin: 0; border: 1px solid var(--line); }
+  .bundleBenefitsGrid h3 { margin: 22px 0 8px; font-size: 19px; }
+  .bundleAudienceGrid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .bundleAudienceGrid > div { padding: 15px; margin: 0; }
+  .bundleSteps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .bundleSteps article { min-height: 0; padding: 20px; }
+  .bundleSteps h3 { margin: 22px 0 8px; font-size: 20px; }
+  .processTrack { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .processTrack > div { padding: 0 0 18px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .processTrack > div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .processTrack strong { margin: 16px 0 7px; }
+}
+@media (max-width: 370px) {
+  .waStats { grid-template-columns: minmax(0, 1fr); }
+  .waHowGrid { grid-template-columns: minmax(0, 1fr); }
+  .waReqGrid { grid-template-columns: minmax(0, 1fr); }
+}
