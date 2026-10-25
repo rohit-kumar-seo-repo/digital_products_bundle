@@ -1,4 +1,6 @@
+import type {Metadata} from "next";
 import Link from "next/link";
+export const metadata:Metadata={title:"Frequently Asked Questions | Digital Products Bundle",description:"Answers about digital product purchases, payments, delivery, support and refunds.",alternates:{canonical:"/faq"}};
 import { Reveal } from "@/components/motion";
 
 const groups = [
