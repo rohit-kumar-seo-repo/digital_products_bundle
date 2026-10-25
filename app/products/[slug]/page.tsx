@@ -9,7 +9,7 @@ import { Reveal } from "@/components/motion";
 const plans = [
   { label: "Monthly", price: "₹149", note: "One-month access · one-time payment" },
   { label: "6 Months", price: "₹499", note: "One-time" },
-  { label: "Yearly", price: "₹899", note: "Best value" },
+  { label: "Yearly", price: "₹899", note: "One-year access · one-time payment" },
 ];
 
 const features = [
