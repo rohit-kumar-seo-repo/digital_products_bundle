@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { supabaseUrl } from "@/lib/store-config";
+
+export const metadata: Metadata = { title: "Order Status", robots: { index: false, follow: false } };
 
 type OrderStatus = {
   order: {
