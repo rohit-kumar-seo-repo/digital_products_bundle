@@ -1694,3 +1694,17 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .resourceGridArticlesV1 a { transition: none; }
 }
+
+
+/* Empty checkout state: visible page heading even before a product is selected. */
+.checkoutEmptyTitleV1 {
+  margin: 20px 0 22px;
+  color: var(--ink);
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -.055em;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 620px) {
+  .checkoutEmptyTitleV1 { font-size: clamp(28px, 8vw, 36px); }
+}
