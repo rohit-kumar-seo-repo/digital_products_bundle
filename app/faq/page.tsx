@@ -33,7 +33,7 @@ const groups = [
 ];
 
 export const metadata:Metadata = {
-  title: "Help & FAQs | Digital Products Bundle",
+  title: "Help & FAQs",
   description: "Clear answers about digital products, payment, delivery, refunds and customer support.",
   alternates: { canonical: "/faq" },
 };
