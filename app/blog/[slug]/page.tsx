@@ -53,7 +53,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     author: { "@type": "Organization", name: "Digital Products Bundle" },
     publisher: { "@type": "Organization", name: "Digital Products Bundle", url: SITE },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    mainEntity: undefined,
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
